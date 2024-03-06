@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Element Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        main {
+			max-width: 100%;
+            background: linear-gradient( 90deg, #f13030, #ffb833);
+            color: #fff;
+			margin: 0 auto;
+            padding: 20px;
+        }
+        img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: auto;
+    border-radius: 5px;
+    box-shadow: 0px 0px 0px 5px rgba(0, 0, 0, 0.3);
+}
+@media (prefers-color-scheme: dark) {
+
+    main {
+            background: linear-gradient( 90deg, #f13030, #ffb833);
+        }
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #333;
+    text-align: center;
+}
+
+select {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    display: block;
+    margin: 0 auto;
+	color: #fff;
+	background-color: rgb(255 123 59);
+}
+
+select option {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    background-color: rgba(248, 114, 49, 0.5);
+    color: #333;
+}
+
+select option[value^="CH"] {
+    color: rgba(176, 196, 222,);
+}
+
+p {
+	text-align: center;
+}
+
+h2 {
+	text-align: center;
+	color: rgba(255, 255, 255, 1);
+}
+
+#prevBtn, #nextBtn {
+    background-color: rgba(248, 114, 49, 1);
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+	border-radius: 5px;
+	border: 6px solid rgba(255, 255, 255, 0.3);
+  }
+  
+  #prevBtn:hover, #nextBtn:hover {
+    background-color: rgba(248, 114, 120, 1);
+}
+    </style>
+</head>
+<body>
+
+<main>
+    <section>
+        <h2>Fire Punch</h2>
+        
+    
+	
+		<div>
+		<select id="folderSelect">
+		</select>
+		<br/>
+		<div>
+			<p>
+				<button id="prevBtn">Previous</button>
+				<button id="nextBtn">Next</button>
+			</p>
+		</div>
+	</div>
+	<br/>
+	<div id="imageContainer">
+	</div>
+	
+        
+    </section>
+</main>
+
+<script>
+        var imageContainer = document.getElementById('imageContainer');
+        var folderSelect = document.getElementById('folderSelect');
+        var prevBtn = document.getElementById('prevBtn');
+        var nextBtn = document.getElementById('nextBtn');
+
+        var folderImages = {
+                "CH1": 68,
+				"CH2": 20,
+				"CH3": 18,
+				"CH4": 21,
+				"CH5": 17,
+				"CH6": 18,
+				"CH7": 22,
+				"CH8": 22,
+				"CH9": 24,
+				"CH10": 20,
+				"CH11": 19,
+				"CH12": 19,
+				"CH13": 22,
+				"CH14": 26,
+				"CH15": 25,
+				"CH16": 20,
+				"CH17": 15,
+				"CH18": 16,
+				"CH19": 24,
+				"CH20": 24,
+				"CH21": 21,
+				"CH22": 19,
+				"CH23": 19,
+				"CH24": 21,
+				"CH25": 22,
+				"CH26": 17,
+				"CH27": 16,
+				"CH28": 18,
+				"CH29": 24,
+				"CH30": 18,
+				"CH31": 18,
+				"CH32": 22,
+				"CH33": 23,
+				"CH34": 17,
+				"CH35": 18,
+				"CH36": 19,
+				"CH37": 16,
+				"CH38": 16,
+				"CH39": 16,
+				"CH40": 23,
+				"CH41": 20,
+				"CH42": 21,
+				"CH43": 19,
+				"CH44": 19,
+				"CH45": 25,
+				"CH46": 20,
+				"CH47": 18,
+				"CH48": 15,
+				"CH49": 27,
+				"CH50": 23,
+				"CH51": 17,
+				"CH52": 21,
+				"CH53": 20,
+				"CH54": 17,
+				"CH55": 20,
+				"CH56": 21,
+				"CH57": 20,
+				"CH58": 16,
+				"CH59": 15,
+				"CH60": 16,
+				"CH61": 25,
+				"CH62": 19,
+				"CH63": 18,
+				"CH64": 21,
+				"CH65": 17,
+				"CH66": 17,
+				"CH67": 19,
+				"CH68": 16,
+				"CH69": 17,
+				"CH70": 23,
+				"CH71": 18,
+				"CH72": 23,
+				"CH73": 23,
+				"CH74": 16,
+				"CH75": 17,
+				"CH76": 16,
+				"CH77": 17,
+				"CH78": 14,
+				"CH79": 19,
+				"CH80": 18,
+				"CH81": 16,
+				"CH82": 18,
+				"CH83": 20,
+            
+            // Add more entries as needed
+        };
+
+        // Dynamically populate the dropdown with options
+        for (var folder in folderImages) {
+            if (folderImages.hasOwnProperty(folder)) {
+                var option = document.createElement('option');
+                option.value = folder;
+                option.text = "Chapter " + folder.slice(2);
+                folderSelect.appendChild(option);
+            }
+        }
+
+        function loadImagesFromFolder(folderPath, totalImages) {
+    imageContainer.innerHTML = '';
+
+    for (var i = 1; i <= totalImages; i++) {
+        var imgDiv = document.createElement('div');
+        imgDiv.classList.add('image-container');
+        var img = document.createElement('img');
+        img.src = "Manga/" + folderPath + "/" + i + ".jpg";
+        img.alt = "Image " + i;
+        imgDiv.appendChild(img);
+        imageContainer.appendChild(imgDiv);
+
+        var br = document.createElement('br');
+        imageContainer.appendChild(br);
+    }
+}
+
+
+        folderSelect.addEventListener('change', function () {
+            var selectedFolder = this.value;
+            var folderPath = "./" + selectedFolder;
+            var totalImages = folderImages[selectedFolder];
+            loadImagesFromFolder(folderPath, totalImages);
+
+            history.pushState(null, '', '?FP=' + selectedFolder);
+
+            localStorage.setItem('selectedFolder', selectedFolder);
+        });
+
+        prevBtn.addEventListener('click', function () {
+            var currentIndex = Array.from(folderSelect.options).findIndex(option => option.value === folderSelect.value);
+            var prevIndex = currentIndex > 0 ? currentIndex - 1 : 0;
+            folderSelect.value = folderSelect.options[prevIndex].value;
+            var selectedFolder = folderSelect.value;
+            var folderPath = "./" + selectedFolder;
+            var totalImages = folderImages[selectedFolder];
+            loadImagesFromFolder(folderPath, totalImages);
+            history.pushState(null, '', '?FP=' + selectedFolder);
+            localStorage.setItem('selectedFolder', selectedFolder);
+        });
+
+        nextBtn.addEventListener('click', function () {
+            var currentIndex = Array.from(folderSelect.options).findIndex(option => option.value === folderSelect.value);
+            var nextIndex = currentIndex < folderSelect.options.length - 1 ? currentIndex + 1 : folderSelect.options.length - 1;
+            folderSelect.value = folderSelect.options[nextIndex].value;
+            var selectedFolder = folderSelect.value;
+            var folderPath = "./" + selectedFolder;
+            var totalImages = folderImages[selectedFolder];
+            loadImagesFromFolder(folderPath, totalImages);
+            history.pushState(null, '', '?FP=' + selectedFolder);
+            localStorage.setItem('selectedFolder', selectedFolder);
+        });
+
+        // Function to get URL parameters
+        function getUrlParam(parameter, defaultValue) {
+            var urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(parameter) || defaultValue;
+        }
+
+        // Get the folder from URL parameter or use the default value
+        var initialFolder = getUrlParam('FP', folderSelect.value);
+        folderSelect.value = initialFolder;
+        var initialFolderPath = "./" + initialFolder;
+        var initialTotalImages = folderImages[initialFolder];
+        loadImagesFromFolder(initialFolderPath, initialTotalImages);
+    </script>
+
+</body>
+</html>
