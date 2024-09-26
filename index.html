@@ -14,7 +14,7 @@
         }
         main {
 			max-width: 100%;
-            background: linear-gradient( 90deg, #f13030, #ffb833);
+            
             color: #fff;
 			margin: 0 auto;
             padding: 20px;
@@ -30,7 +30,7 @@
 @media (prefers-color-scheme: dark) {
 
     main {
-            background: linear-gradient( 90deg, #f13030, #ffb833);
+            
         }
 }
 
@@ -49,7 +49,9 @@ select {
     display: block;
     margin: 0 auto;
 	color: #fff;
-	background-color: rgb(255 123 59);
+	    background-color: rgb(255 123 59 / 0%);
+		border-radius: 5px;
+	border: 6px solid rgba(255, 255, 255, 0.3);
 }
 
 select option {
@@ -74,7 +76,7 @@ h2 {
 }
 
 #prevBtn, #nextBtn {
-    background-color: rgba(248, 114, 49, 1);
+    background-color: rgba(248, 114, 49, 0);
     border: none;
     color: white;
     padding: 15px 32px;
@@ -89,7 +91,7 @@ h2 {
   }
   
   #prevBtn:hover, #nextBtn:hover {
-    background-color: rgba(248, 114, 120, 1);
+    background-color: rgba(248, 114, 120, 0);
 }
 
 	    #goUpBtn {
@@ -98,7 +100,7 @@ h2 {
     bottom: 20px;
     right: 20px;
     padding: 10px 20px;
-    background-color: #fa8532;
+    background-color: #00000073;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -125,6 +127,22 @@ h2 {
 			</p>
 		</div>
 	</div>
+	<div class="" style="
+    display: flex;
+    align-items: baseline;
+    padding: 20px;
+    border-radius: 8px;
+    width: fit-content;
+    margin: 0 auto;
+">
+        <label for="colorPicker" style="
+    color: white;
+    font-family: monospace;
+    margin-right: 10px;
+">Pick Background Color:</label>
+        <input type="color" id="colorPicker" name="background-color" value="#ffffff" style="block-size: 22px;">
+    </div>
+	
 	<br/>
 	<div id="imageContainer">
 	</div>
@@ -132,6 +150,28 @@ h2 {
         
     </section>
 </main>
+<script>
+        // Get the color picker and body elements
+        const colorPicker = document.getElementById('colorPicker');
+        const body = document.body;
+
+        // Check if a color is already stored in localStorage
+        const savedColor = localStorage.getItem('bgColor');
+        if (savedColor) {
+            body.style.backgroundColor = savedColor;
+            colorPicker.value = savedColor;
+        } else {
+            colorPicker.value = "#68607b"; // Set default to grey if no color is saved
+            body.style.backgroundColor = colorPicker.value;
+        }
+
+        // Change the background color and save it to localStorage when a new color is picked
+        colorPicker.addEventListener('input', function() {
+            const selectedColor = colorPicker.value;
+            body.style.backgroundColor = selectedColor;
+            localStorage.setItem('bgColor', selectedColor);
+        });
+    </script>
 <script>
 window.onscroll = function() {scrollFunction()};
 
