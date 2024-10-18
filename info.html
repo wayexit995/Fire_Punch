@@ -1,0 +1,89 @@
+<html><head>
+		<title>Fire Punch</title>
+		<link rel="icon" type="image/x-icon" href="https://avatars.githubusercontent.com/u/105863400">
+		<style>
+		.s1 h1 {
+		font-family: monospace;
+		}
+		
+		img {
+		width: 80%;
+		}
+		</style>
+	</head>
+	<body style="
+    background-color: #dcd8d7;
+">
+
+	<div style="
+    margin-left: auto;
+    /* margin-right: auto; */
+    /* text-align: center; */
+    /* padding-top: 10%; */
+">
+	
+<div id="imageContainer" style="
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    padding-top: 10%;
+"></div>
+<script>
+    const imageContainer = document.getElementById("imageContainer");
+
+    // Array of objects containing image paths and their corresponding background colors
+    const imagesWithColors = [
+        { src: './FP1/1.jpg', bgColor: '#dcd8d7' }, 
+        { src: './FP1/2.jpg', bgColor: '#dcd8d7' }, 
+        { src: './FP1/3.jpg', bgColor: '#dcd8d7' }, 
+        { src: './FP1/4.jpg', bgColor: '#dcd8d7' },
+		{ src: './FP1/5.jpg', bgColor: '#d7dcd7' },
+		{ src: './FP1/6.jpg', bgColor: '#dcd8d7' },
+		{ src: './FP1/7.jpg', bgColor: '#dcd8d7' },
+        { src: './FP1/8.jpg', bgColor: '#dcd8d7' }  
+    ];
+
+    // Function to load a random image and set its associated background color
+    function loadRandomImage() {
+        const randomIndex = Math.floor(Math.random() * imagesWithColors.length);
+        const selectedImage = imagesWithColors[randomIndex];
+
+        // Load random image
+        const randomImage = document.createElement('img');
+        randomImage.src = selectedImage.src;
+        imageContainer.innerHTML = ''; // Clear previous image
+        imageContainer.appendChild(randomImage);
+
+        // Set custom background color
+        document.body.style.backgroundColor = selectedImage.bgColor;
+    }
+
+    // Load a random image and background color on page load
+    loadRandomImage();
+
+    // Optionally, reload a random image and background color every few seconds
+    // setInterval(loadRandomImage, 5000); // Uncomment to refresh every 5 seconds
+    </script>
+
+
+	<div style="
+    padding-left: 10%;
+"><h1 style="
+    font-size: 80;
+    padding-right: 44%;
+">FIRE PUNCH
+</h1>
+<div class="s1" style="
+    padding-right: 10%;
+">
+<h1>author: TATSUKI FUJIMOTO</h1>
+<h1>original run: 2016 - 2018</h1>
+<h1>published: SHUEISHA</h1>
+<h1>volumes: 8 (83 CHAPTERS)</h1>
+<h1>genre: ACTION, PSYCHOLOGICAL, SCI-FI, SHOUNEN, SUPERNATURAL</h1>
+</div>
+
+</div>
+</div>
+	
+</body></html>
